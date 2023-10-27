@@ -1,1 +1,384 @@
-[]
+[
+    {
+        "id": "bcd00a2e5a62619d",
+        "type": "tab",
+        "label": "SQLite 메모장예제",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "9e23d69d3604ae50",
+        "type": "ui_tab",
+        "name": "Home",
+        "icon": "dashboard",
+        "disabled": false,
+        "hidden": false
+    },
+    {
+        "id": "6e66b6fb3adeb976",
+        "type": "ui_group",
+        "name": "Default",
+        "tab": "9e23d69d3604ae50",
+        "order": 1,
+        "disp": true,
+        "width": "10",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "362688dd6c92dad5",
+        "type": "sqlitedb",
+        "db": "/tmp/test.db",
+        "mode": "RWC"
+    },
+    {
+        "id": "ac78f1de1c58c2f1",
+        "type": "ui_tab",
+        "name": "데이터분석",
+        "icon": "fa-line-chart",
+        "order": 1,
+        "disabled": false,
+        "hidden": false
+    },
+    {
+        "id": "fc215e40e882090d",
+        "type": "inject",
+        "z": "bcd00a2e5a62619d",
+        "name": "create table test",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 120,
+        "y": 60,
+        "wires": [
+            [
+                "7f9e72525ad9a582"
+            ]
+        ]
+    },
+    {
+        "id": "7f9e72525ad9a582",
+        "type": "sqlite",
+        "z": "bcd00a2e5a62619d",
+        "mydb": "362688dd6c92dad5",
+        "sqlquery": "fixed",
+        "sql": "CREATE TABLE \"test\" (\n\t\"id\"\tINTEGER PRIMARY KEY AUTOINCREMENT,\n\t\"name\"\tTEXT NOT NULL,\n\t\"phone\"\tTEXT,\n\t\"memo\"\tTEXT,\n\t\"timestamp\"\tTEXT DEFAULT CURRENT_TIMESTAMP\n);",
+        "name": "",
+        "x": 330,
+        "y": 60,
+        "wires": [
+            [
+                "6c52df11d2991999"
+            ]
+        ]
+    },
+    {
+        "id": "6c52df11d2991999",
+        "type": "debug",
+        "z": "bcd00a2e5a62619d",
+        "name": "debug 1",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 660,
+        "y": 60,
+        "wires": []
+    },
+    {
+        "id": "f9c8e74f3776bc60",
+        "type": "sqlite",
+        "z": "bcd00a2e5a62619d",
+        "mydb": "362688dd6c92dad5",
+        "sqlquery": "msg.topic",
+        "sql": "",
+        "name": "",
+        "x": 670,
+        "y": 200,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "c99bae02fcfe7d1f",
+        "type": "ui_form",
+        "z": "bcd00a2e5a62619d",
+        "name": "",
+        "label": "memo form",
+        "group": "6e66b6fb3adeb976",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "options": [
+            {
+                "label": "name",
+                "value": "name",
+                "type": "text",
+                "required": true,
+                "rows": null
+            },
+            {
+                "label": "phone",
+                "value": "phone",
+                "type": "text",
+                "required": false,
+                "rows": null
+            },
+            {
+                "label": "memo",
+                "value": "memo",
+                "type": "multiline",
+                "required": false,
+                "rows": 3
+            }
+        ],
+        "formValue": {
+            "name": "",
+            "phone": "",
+            "memo": ""
+        },
+        "payload": "",
+        "submit": "저장",
+        "cancel": "초기화",
+        "topic": "topic",
+        "topicType": "msg",
+        "splitLayout": "",
+        "className": "",
+        "x": 90,
+        "y": 140,
+        "wires": [
+            [
+                "2890ecb5ba54b4b4",
+                "a7dbbddc91ea37f2"
+            ]
+        ]
+    },
+    {
+        "id": "2890ecb5ba54b4b4",
+        "type": "function",
+        "z": "bcd00a2e5a62619d",
+        "name": "Insert a row",
+        "func": "var sql = \"insert into test (name, phone, memo) values('\";\nsql += msg.payload.name + \"','\";\nsql += msg.payload.phone + \"','\";\nsql += msg.payload.memo + \"')\";\nmsg.topic = sql;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 330,
+        "y": 160,
+        "wires": [
+            [
+                "c7d547ef2dab0309",
+                "f9c8e74f3776bc60"
+            ]
+        ]
+    },
+    {
+        "id": "c7d547ef2dab0309",
+        "type": "debug",
+        "z": "bcd00a2e5a62619d",
+        "name": "debug 2",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 660,
+        "y": 100,
+        "wires": []
+    },
+    {
+        "id": "47aaf0b4ba76edaf",
+        "type": "ui_text",
+        "z": "bcd00a2e5a62619d",
+        "group": "6e66b6fb3adeb976",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "text",
+        "format": "{{msg.topic}}",
+        "layout": "col-center",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#000000",
+        "x": 650,
+        "y": 160,
+        "wires": []
+    },
+    {
+        "id": "aa819dad08c332b2",
+        "type": "sqlite",
+        "z": "bcd00a2e5a62619d",
+        "mydb": "362688dd6c92dad5",
+        "sqlquery": "fixed",
+        "sql": "select * from test order by timestamp desc limit 20",
+        "name": "",
+        "x": 510,
+        "y": 280,
+        "wires": [
+            [
+                "e28ef107788f8584",
+                "78ceeab2e4dae92e"
+            ]
+        ]
+    },
+    {
+        "id": "cdeab603581a78be",
+        "type": "inject",
+        "z": "bcd00a2e5a62619d",
+        "name": "select last 20 rows",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": "0.5",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 150,
+        "y": 280,
+        "wires": [
+            [
+                "aa819dad08c332b2"
+            ]
+        ]
+    },
+    {
+        "id": "e28ef107788f8584",
+        "type": "debug",
+        "z": "bcd00a2e5a62619d",
+        "name": "debug 3",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 700,
+        "y": 280,
+        "wires": []
+    },
+    {
+        "id": "a7dbbddc91ea37f2",
+        "type": "delay",
+        "z": "bcd00a2e5a62619d",
+        "name": "",
+        "pauseType": "delay",
+        "timeout": "1",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 320,
+        "y": 220,
+        "wires": [
+            [
+                "aa819dad08c332b2"
+            ]
+        ]
+    },
+    {
+        "id": "78ceeab2e4dae92e",
+        "type": "ui_template",
+        "z": "bcd00a2e5a62619d",
+        "group": "6e66b6fb3adeb976",
+        "name": "",
+        "order": 3,
+        "width": "10",
+        "height": "10",
+        "format": "<table style=\"width:100%\" border=\"1\" cellpadding=\"1\" cellspacing=\"0\">\n  <tr>\n    <th>연번</th>\n    <th>번호</th> \n    <th>이름</th>\n    <th>전화</th> \n    <th>메모</th>\n    <th>시간</th>\n  </tr>\n  <tr ng-repeat=\"x in msg.payload | limitTo:20\"\n   style=\"font-size:9pt;text-align:center\">\n    <td style=\"text-align:right\">{{$index}}&nbsp;&nbsp;</td>\n    <td>{{msg.payload[$index].id}}</td>\n    <td>{{msg.payload[$index].name}}</td> \n    <td>{{msg.payload[$index].phone}}</td>\n    <td>{{msg.payload[$index].memo}}</td>\n    <td>{{msg.payload[$index].timestamp}}</td>\n  </tr>\n</table>",
+        "storeOutMessages": true,
+        "fwdInMessages": true,
+        "resendOnRefresh": true,
+        "templateScope": "local",
+        "className": "",
+        "x": 700,
+        "y": 360,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "5cf637a9abe6ddb2",
+        "type": "inject",
+        "z": "bcd00a2e5a62619d",
+        "name": "Delete all rows",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 140,
+        "y": 360,
+        "wires": [
+            [
+                "43dc8ff201db9368"
+            ]
+        ]
+    },
+    {
+        "id": "43dc8ff201db9368",
+        "type": "sqlite",
+        "z": "bcd00a2e5a62619d",
+        "mydb": "362688dd6c92dad5",
+        "sqlquery": "fixed",
+        "sql": "delete from test",
+        "name": "",
+        "x": 510,
+        "y": 360,
+        "wires": [
+            [
+                "78ceeab2e4dae92e"
+            ]
+        ]
+    }
+]
