@@ -1,0 +1,12 @@
+{
+    "name": "sqlite",
+    "description": "sqlite CREATE, INSERT, SELECT, DELETE",
+    "version": "0.0.1",
+    "dependencies": {},
+    "node-red": {
+        "settings": {
+            "flowFile": "sqlite.json",
+            "credentialsFile": "sqlite_cred.json"
+        }
+    }
+}
