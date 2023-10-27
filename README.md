@@ -5,5 +5,5 @@ sqlite CREATE, INSERT, SELECT, DELETE
 
 ### 설명
 
- 이것은 프로젝트 README.md 파일입니다. 이 파일에는 프로젝트의 설명, 
- 이용방법, 그 외 정보를 기재합니다.
+작성 환경 : WSL 2 Ubuntu
+Node-red의 form 노드를 이용하여 이름, 전화번호, 메모를 입력 받아 SQLite(/tmp/test.db)에 저장하는 예제이다.
