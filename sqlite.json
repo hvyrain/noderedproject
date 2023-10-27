@@ -18,7 +18,7 @@
     {
         "id": "6e66b6fb3adeb976",
         "type": "ui_group",
-        "name": "Default",
+        "name": "입력폼과 SQLite 연동 예제",
         "tab": "9e23d69d3604ae50",
         "order": 1,
         "disp": true,
@@ -31,15 +31,6 @@
         "type": "sqlitedb",
         "db": "/tmp/test.db",
         "mode": "RWC"
-    },
-    {
-        "id": "ac78f1de1c58c2f1",
-        "type": "ui_tab",
-        "name": "데이터분석",
-        "icon": "fa-line-chart",
-        "order": 1,
-        "disabled": false,
-        "hidden": false
     },
     {
         "id": "fc215e40e882090d",
@@ -121,28 +112,28 @@
         "type": "ui_form",
         "z": "bcd00a2e5a62619d",
         "name": "",
-        "label": "memo form",
+        "label": "메모 입력 양식",
         "group": "6e66b6fb3adeb976",
         "order": 2,
         "width": 0,
         "height": 0,
         "options": [
             {
-                "label": "name",
+                "label": "이름*",
                 "value": "name",
                 "type": "text",
                 "required": true,
                 "rows": null
             },
             {
-                "label": "phone",
+                "label": "전화번호",
                 "value": "phone",
                 "type": "text",
                 "required": false,
                 "rows": null
             },
             {
-                "label": "memo",
+                "label": "메모",
                 "value": "memo",
                 "type": "multiline",
                 "required": false,
@@ -161,7 +152,7 @@
         "topicType": "msg",
         "splitLayout": "",
         "className": "",
-        "x": 90,
+        "x": 100,
         "y": 140,
         "wires": [
             [
@@ -205,27 +196,6 @@
         "statusType": "auto",
         "x": 660,
         "y": 100,
-        "wires": []
-    },
-    {
-        "id": "47aaf0b4ba76edaf",
-        "type": "ui_text",
-        "z": "bcd00a2e5a62619d",
-        "group": "6e66b6fb3adeb976",
-        "order": 1,
-        "width": 0,
-        "height": 0,
-        "name": "",
-        "label": "text",
-        "format": "{{msg.topic}}",
-        "layout": "col-center",
-        "className": "",
-        "style": false,
-        "font": "",
-        "fontSize": 16,
-        "color": "#000000",
-        "x": 650,
-        "y": 160,
         "wires": []
     },
     {
